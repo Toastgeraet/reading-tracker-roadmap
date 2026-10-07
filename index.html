@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reading Tracker Roadmap</title>
+<meta name="description" content="What's coming next to the Reading Tracker app.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232F6B4F'/%3E%3Cpath d='M8 9.5c2.6-.9 5.3-.6 8 1 2.7-1.6 5.4-1.9 8-1v13c-2.6-.9-5.3-.6-8 1-2.7-1.6-5.4-1.9-8-1z' fill='none' stroke='%23fff' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 10.5v13' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #F6F4EF;
+    --card: #FFFFFF;
+    --text: #1F1B16;
+    --muted: #6B645B;
+    --border: #E3DED5;
+    --primary: #2F6B4F;
+    --on-primary: #FFFFFF;
+    --primary-soft: #DCEBE2;
+    --track: #E8E3DA;
+    --amber: #9A5B00;
+    --amber-soft: #FCEBD2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #151412;
+      --card: #22201D;
+      --text: #F2EEE8;
+      --muted: #A69E93;
+      --border: #36322D;
+      --primary: #7CC4A0;
+      --on-primary: #0E2A1D;
+      --primary-soft: #21392D;
+      --track: #36322D;
+      --amber: #F5C27A;
+      --amber-soft: #3A2C17;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 16px 56px;
+  }
+
+  header { margin-bottom: 40px; }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .brand svg { width: 28px; height: 28px; flex: none; }
+  h1 {
+    margin: 14px 0 10px;
+    font-size: clamp(30px, 7vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .intro { margin: 0; color: var(--muted); font-size: 17px; max-width: 34em; }
+
+  /* Timeline */
+  .timeline { position: relative; }
+  .phase {
+    position: relative;
+    padding-left: 32px;
+    padding-bottom: 36px;
+  }
+  .phase::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 10px;
+    bottom: -10px;
+    width: 2px;
+    background: var(--track);
+  }
+  .phase:last-child::before { display: none; }
+  .phase::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 3px solid var(--primary);
+  }
+  .phase.done::after { background: var(--primary); }
+  .phase.later::after { border-color: var(--muted); border-style: dashed; }
+
+  .phase-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 10px;
+    margin-bottom: 4px;
+  }
+  h2 { margin: 0; font-size: 22px; line-height: 1.3; letter-spacing: -0.01em; }
+  .chip {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .chip.done { background: var(--primary); color: var(--on-primary); }
+  .chip.planned { background: var(--primary-soft); color: var(--primary); }
+  .chip.later { background: var(--track); color: var(--muted); }
+  .phase-lead { margin: 0 0 14px; color: var(--muted); }
+
+  .features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  @media (min-width: 600px) {
+    .features { grid-template-columns: 1fr 1fr; }
+  }
+  .features li {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .features strong { display: block; font-size: 16px; margin-bottom: 2px; }
+  .features span { color: var(--muted); font-size: 15px; }
+  .phase.later .features li { background: transparent; border-style: dashed; }
+
+  .note {
+    margin-top: 8px;
+    background: var(--amber-soft);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .note strong { color: var(--amber); }
+  .note p { margin: 0; }
+  .note p + p { margin-top: 6px; }
+
+  footer {
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M8 9.5c2.6-.9 5.3-.6 8 1 2.7-1.6 5.4-1.9 8-1v13c-2.6-.9-5.3-.6-8 1-2.7-1.6-5.4-1.9-8-1z" fill="none" stroke="var(--bg)" stroke-width="2" stroke-linejoin="round"/><path d="M16 10.5v13" stroke="var(--bg)" stroke-width="2"/></svg>
+      Reading Tracker
+    </div>
+    <h1>Roadmap</h1>
+    <p class="intro">What the app does today, and what's coming next. Many of these ideas came from you, so thank you!</p>
+  </header>
+
+  <div class="timeline">
+    <section class="phase done" aria-labelledby="now">
+      <div class="phase-head">
+        <h2 id="now">Available now</h2>
+        <span class="chip done">In the app</span>
+      </div>
+      <p class="phase-lead">Set a reading goal and the app tells you how much to read each day.</p>
+      <ul class="features">
+        <li><strong>Reading goals</strong><span>A book, its page count, an optional start page, and the date you want to finish.</span></li>
+        <li><strong>Daily target</strong><span>Pages left, days left, and how many pages to read today.</span></li>
+        <li><strong>Easy logging</strong><span>Log the pages you read or the page you stopped at, also for earlier days.</span></li>
+        <li><strong>Backup &amp; restore</strong><span>Save your data to a file, restore it any time, or back up to a folder automatically.</span></li>
+        <li><strong>English &amp; German</strong><span>Plus a dark mode that follows your phone.</span></li>
+        <li><strong>Updates inside the app</strong><span>Most improvements arrive without reinstalling.</span></li>
+      </ul>
+    </section>
+
+    <section class="phase" aria-labelledby="p1">
+      <div class="phase-head">
+        <h2 id="p1">Stay motivated</h2>
+        <span class="chip planned">Planned</span>
+      </div>
+      <p class="phase-lead">See how your reading adds up.</p>
+      <ul class="features">
+        <li><strong>Reading charts</strong><span>Pages per week and per month, with your average.</span></li>
+        <li><strong>Reading streaks</strong><span>How many days in a row you've read, and your record.</span></li>
+        <li><strong>Ahead or behind?</strong><span>See at a glance whether you're on track for your finish date.</span></li>
+        <li><strong>Quick-log buttons</strong><span>Add +10 or +20 pages with one tap.</span></li>
+      </ul>
+    </section>
+
+    <section class="phase" aria-labelledby="p2">
+      <div class="phase-head">
+        <h2 id="p2">Your books</h2>
+        <span class="chip planned">Planned</span>
+      </div>
+      <p class="phase-lead">More than page numbers: your books, your notes, your next read.</p>
+      <ul class="features">
+        <li><strong>Book details</strong><span>The author and more for each book.</span></li>
+        <li><strong>Notes &amp; quotes</strong><span>Keep your thoughts and favorite lines with each book.</span></li>
+        <li><strong>To-be-read list</strong><span>Collect the books you want to read, and start a goal from one when you're ready.</span></li>
+        <li><strong>What should I read next?</strong><span>Can't decide? Let the app pick a book from your list.</span></li>
+        <li><strong>momox link</strong><span>Find a book from your list at momox.</span></li>
+        <li><strong>Share your progress</strong><span>Send your week's pages, your streak and your current book to friends, for example on WhatsApp.</span></li>
+      </ul>
+    </section>
+
+    <section class="phase later" aria-labelledby="p3">
+      <div class="phase-head">
+        <h2 id="p3">Reading together</h2>
+        <span class="chip later">Someday</span>
+      </div>
+      <p class="phase-lead">These need online accounts, so they're further away. Until then, your data stays on your phone.</p>
+      <ul class="features">
+        <li><strong>Leaderboards with friends</strong><span>Compare pages and streaks with the people you choose.</span></li>
+        <li><strong>Reading buddies</strong><span>Read the same book together and see each other's progress.</span></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="note">
+    <p><strong>Have an idea or a favorite?</strong> Tell us in the WhatsApp group.</p>
+    <p>The order isn't final. Polls in the group help decide what comes first.</p>
+  </div>
+
+  <footer>Last updated 7 October 2026</footer>
+</main>
+</body>
+</html>
